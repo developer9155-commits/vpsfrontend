@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#09090b">
+<title>Proto VPS Bot Manager</title>
+<link rel="icon" href="assets/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- Lucide-style icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <symbol id="i-dashboard" viewBox="0 0 24 24"><rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/></symbol>
+  <symbol id="i-server" viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01M6 18h.01"/></symbol>
+  <symbol id="i-plug" viewBox="0 0 24 24"><path d="M12 22v-5M9 8V2M15 8V2"/><path d="M18 8v5a4 4 0 0 1-4 4h-4a4 4 0 0 1-4-4V8Z"/></symbol>
+  <symbol id="i-bot" viewBox="0 0 24 24"><path d="M12 8V4H8"/><rect width="16" height="12" x="4" y="8" rx="2"/><path d="M2 14h2M20 14h2M15 13v2M9 13v2"/></symbol>
+  <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><path d="m4 17 6-6-6-6M12 19h8"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M21 4h-7M10 4H3M21 12h-9M8 12H3M21 20h-5M12 20H3M14 2v4M8 10v4M16 18v4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="m6 3 14 9-14 9Z"/></symbol>
+  <symbol id="i-stop" viewBox="0 0 24 24"><rect width="14" height="14" x="5" y="5" rx="2"/></symbol>
+  <symbol id="i-restart" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4M16 13H8M16 17H8M10 9H8"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect width="14" height="14" x="8" y="8" rx="2"/><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect width="16" height="16" x="4" y="4" rx="2"/><rect width="6" height="6" x="9" y="9"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></symbol>
+  <symbol id="i-db" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5M3 12a9 3 0 0 0 18 0"/></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><path d="M22 12H2"/><path d="m5.45 5.11-3.45 6.89v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"/><path d="M6 16h.01M10 16h.01"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></symbol>
+  <symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3ZM12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  </g>
+</svg>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand"><img src="assets/logo.svg" alt="" width="36" height="36"><div><b>TechBooster</b><small>VPS Bot Manager</small></div></div>
+    <nav id="nav">
+      <a href="#dashboard" data-view="dashboard"><svg class="i"><use href="#i-dashboard"/></svg>Dashboard</a>
+      <a href="#vps" data-view="vps"><svg class="i"><use href="#i-plug"/></svg>VPS connection</a>
+      <a href="#bots" data-view="bots"><svg class="i"><use href="#i-bot"/></svg>Bots</a>
+      <a href="#upload" data-view="upload"><svg class="i"><use href="#i-upload"/></svg>Upload bot</a>
+      <a href="#logs" data-view="logs"><svg class="i"><use href="#i-terminal"/></svg>Live logs</a>
+      <a href="#settings" data-view="settings"><svg class="i"><use href="#i-sliders"/></svg>Settings</a>
+    </nav>
+    <div class="side-foot"><span class="dot" id="sideDot"></span><span id="sideText">Not configured</span></div>
+  </aside>
+
+  <main class="main">
+    <header class="top">
+      <div><h1 id="title">Dashboard</h1><p id="subtitle"></p></div>
+      <div class="top-r">
+        <span class="pill off" id="pill"><i></i><span>Not configured</span></span>
+        <button class="btn" id="refreshBtn" title="Refresh"><svg class="i"><use href="#i-restart"/></svg><span class="hide-sm">Refresh</span></button>
+      </div>
+    </header>
+
+    <div id="banner" class="banner" hidden></div>
+
+    <!-- Dashboard -->
+    <section class="view" id="view-dashboard">
+      <div class="grid stats" id="statGrid"></div>
+    </section>
+
+    <!-- VPS -->
+    <section class="view" id="view-vps">
+      <div class="two">
+        <form class="card" id="vpsForm" autocomplete="off">
+          <h2>Connect to your VPS</h2>
+          <label>Host or IP address<input id="vHost" required maxlength="253" placeholder="203.0.113.10" autocapitalize="off" spellcheck="false"></label>
+          <div class="row2">
+            <label>SSH port<input id="vPort" type="number" min="1" max="65535" value="22" required></label>
+            <label>SSH username<input id="vUser" required maxlength="32" placeholder="root" autocapitalize="off" spellcheck="false"></label>
+          </div>
+          <label>Sign in with
+            <select id="vAuth"><option value="password">Password</option><option value="key">Private key</option></select>
+          </label>
+          <div id="vPassWrap">
+            <label>SSH password<input id="vPass" type="password" maxlength="256" autocomplete="new-password" required></label>
+          </div>
+          <div id="vKeyWrap" hidden>
+            <label>Private key (PEM text)<textarea id="vKey" rows="6" maxlength="20000" spellcheck="false" placeholder="-----BEGIN OPENSSH PRIVATE KEY-----"></textarea></label>
+            <label>Key passphrase (optional)<input id="vKeyPass" type="password" maxlength="256" autocomplete="new-password"></label>
+          </div>
+          <details class="adv">
+            <summary>Advanced</summary>
+            <label>Server fingerprint (optional)<input id="vFp" maxlength="600" placeholder="SHA256:..." spellcheck="false"></label>
+            <p class="hint">If set, the connection is refused unless the server presents exactly this key. Leave empty to trust the server on first connect.</p>
+          </details>
+          <p class="hint">Your login is sent over HTTPS to your backend and held in its memory only. It is never saved to disk or in this browser, and it is forgotten when you disconnect or the backend restarts.</p>
+          <div class="actions">
+            <button class="btn primary" type="submit" id="vConnect">Connect</button>
+            <button class="btn" type="button" id="vDisconnect">Disconnect</button>
+          </div>
+          <p class="form-err" id="vErr" hidden></p>
+        </form>
+        <div class="card" id="vpsInfo"></div>
+      </div>
+    </section>
+
+    <!-- Bots -->
+    <section class="view" id="view-bots">
+      <div class="bar"><span id="botCount" class="muted"></span><a class="btn primary" href="#upload"><svg class="i"><use href="#i-upload"/></svg>Upload bot</a></div>
+      <div class="grid bots" id="botGrid"></div>
+    </section>
+
+    <!-- Upload -->
+    <section class="view" id="view-upload">
+      <div class="two">
+        <form class="card" id="upForm" autocomplete="off">
+          <h2>New bot project</h2>
+          <div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose files">
+            <svg class="i big"><use href="#i-upload"/></svg>
+            <b>Drop files here or click to browse</b>
+            <span class="muted">.py or .zip project, plus an optional requirements.txt</span>
+            <input type="file" id="picker" accept=".py,.zip,.txt" multiple hidden>
+          </div>
+          <ul class="files" id="fileList"></ul>
+          <label>Project name<input id="upName" required maxlength="60" placeholder="Support bot"></label>
+          <label>Main Python file<input id="upMain" maxlength="120" placeholder="main.py"></label>
+          <div class="chips" id="mainChips" hidden></div>
+          <label class="check"><input type="checkbox" id="upInstall" checked> Install dependencies after upload</label>
+          <p class="hint">Uploading never runs your code. Start the bot yourself from the Bots page.</p>
+          <div class="actions"><button class="btn primary" type="submit" id="upBtn">Upload project</button></div>
+          <p class="form-err" id="upErr" hidden></p>
+        </form>
+        <div class="card">
+          <h2>Progress</h2>
+          <ol class="steps" id="steps">
+            <li data-s="upload"><i></i><div><b>Upload to backend</b><div class="bar-p"><u id="upPct"></u></div></div></li>
+            <li data-s="copy"><i></i><div><b>Validate and copy to VPS</b><small>Archive checks, safe extraction</small></div></li>
+            <li data-s="install"><i></i><div><b>Install dependencies</b><small>Isolated virtualenv per project</small></div></li>
+          </ol>
+          <pre class="pre" id="installLog" hidden></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Logs -->
+    <section class="view" id="view-logs">
+      <div class="card logs">
+        <div class="tools">
+          <select id="lgBot" aria-label="Bot"></select>
+          <input id="lgSearch" type="search" placeholder="Search logs" aria-label="Search logs">
+          <select id="lgLevel" aria-label="Filter"><option value="all">All output</option><option value="stderr">Errors only</option><option value="stdout">Normal only</option></select>
+          <label class="check"><input type="checkbox" id="lgAuto" checked> Auto-scroll</label>
+          <button class="btn" id="lgPause"><svg class="i"><use href="#i-pause"/></svg><span>Pause</span></button>
+          <button class="btn" id="lgClear"><svg class="i"><use href="#i-x"/></svg>Clear</button>
+          <button class="btn" id="lgCopy"><svg class="i"><use href="#i-copy"/></svg>Copy</button>
+        </div>
+        <div class="logbox" id="logBox" tabindex="0" aria-live="off"></div>
+        <div class="muted small" id="logState">Select a bot to stream its output.</div>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section class="view" id="view-settings">
+      <div class="two">
+        <form class="card" id="setForm" autocomplete="off">
+          <h2>Backend connection</h2>
+          <label>Backend API URL<input id="sUrl" type="url" placeholder="https://techbooster-api.onrender.com"></label>
+          <label>Access token<input id="sToken" type="password" autocomplete="off" placeholder="API_TOKEN from Render"></label>
+          <label class="check"><input type="checkbox" id="sRemember"> Remember token on this device</label>
+          <p class="hint">The token is kept in this browser tab only (or on this device if you tick the box). Use a private browser profile on shared computers.</p>
+          <div class="actions"><button class="btn primary" type="submit">Save and test</button><button class="btn" type="button" id="sClear">Forget token</button></div>
+        </form>
+        <div class="card"><h2>About</h2><p class="muted">TechBooster VPS Bot Manager. The dashboard talks only to your backend; SSH keys never reach the browser. Bots run on your VPS as systemd user services, so they keep running if the backend sleeps.</p></div>
+      </div>
+    </section>
+
+    <footer class="foot">Powered by TechBooster</footer>
+  </main>
+</div>
+
+<nav class="bottom" id="bottomNav"></nav>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<dialog id="dlg">
+  <h3 id="dlgTitle"></h3>
+  <div id="dlgText"></div>
+  <div class="actions end"><button class="btn" id="dlgCancel">Cancel</button><button class="btn primary" id="dlgOk">Confirm</button></div>
+</dialog>
+
+<script src="config.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
